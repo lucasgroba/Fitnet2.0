@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" >
+        <item android:title="Configuracion">
+            <menu>
+                <item
+                    android:id="@+id/ItemActividad"
+                    android:icon="@drawable/actividades"
+                    android:title="Actividad" />
+                <item
+                    android:id="@+id/ItemArticulos"
+                    android:icon="@drawable/iconcarritoblue"
+                    android:title="Articulos" />
+                <item
+                    android:id="@+id/ItemUsuario"
+                    android:icon="@drawable/usuarioadd1"
+                    android:title="Usuarios" />
+                <item
+                    android:id="@+id/ItemConceptos"
+                    android:icon="@drawable/interrogacion1"
+                    android:title="Conceptos" />
+            </menu>
+
+        </item>
+    </group>
+
+    <item android:title="Gestionar">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/usuarioadd1"
+                android:title="Socios" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/factura"
+                android:title="Movimientos" />
+        </menu>
+    </item>
+
+</menu>
