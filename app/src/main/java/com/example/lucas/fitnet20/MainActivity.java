@@ -88,9 +88,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.ItemConceptos) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.ItemClientes) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.ItemCobro){
 
         }
 
