@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single" >
+    <group android:checkableBehavior="single">
         <item android:title="Configuracion">
             <menu>
                 <item
@@ -18,24 +19,38 @@
                     android:title="Usuarios" />
                 <item
                     android:id="@+id/ItemConceptos"
-                    android:icon="@drawable/interrogacion1"
+                    android:icon="@drawable/concepto"
                     android:title="Conceptos" />
             </menu>
 
         </item>
-    </group>
 
-    <item android:title="Gestionar">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/usuarioadd1"
-                android:title="Socios" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/factura"
-                android:title="Movimientos" />
-        </menu>
-    </item>
+
+        <item
+            android:title="Gestionar">
+            <menu>
+                <item
+                    android:id="@+id/ItemClientes"
+                    android:icon="@drawable/usercliente"
+                    android:title="Clientes" />
+                <item
+                    android:id="@+id/ItemCobro"
+                    android:icon="@drawable/factura"
+                    android:title="Cobros" />
+            </menu>
+        </item>
+        <item android:title="Reportes">
+            <menu>
+                <item
+                    android:id="@+id/ItemCobroRep"
+                    android:icon="@drawable/factura"
+                    android:title="Cobros" />
+                <item
+                    android:id="@+id/ItemMovimientos"
+                    android:icon="@drawable/movimientos"
+                    android:title="Movimientos" />
+            </menu>
+        </item>
+    </group>
 
 </menu>
