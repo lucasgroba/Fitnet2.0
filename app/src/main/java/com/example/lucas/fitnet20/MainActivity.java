@@ -1,8 +1,11 @@
 package com.example.lucas.fitnet20;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,7 +79,24 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+    /*
+    private void displaySelectedScreen(int id){
+        android.app.Fragment fragment = null;
 
+        switch(id){
+            case R.id.ItemActividad:
+                fragment= new fragmentListar();
+                break;
+        }
+        if(fragment!=null){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main,fragment);
+            ft.commit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+    */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -81,6 +104,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.ItemActividad) {
+            fragmentListar fragment= new fragmentListar();
+            FragmentManager mf = getFragmentManager();
+            android.app.FragmentTransaction t= mf.beginTransaction();
+            t.add(R.id.content_main,fragment);
+            //ft.replace(R.id.content_main,fragment);
+            //ft.commit();
+            t.commit();
             // Handle the camera action
         } else if (id == R.id.ItemArticulos) {
 
@@ -93,7 +123,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
+        //displaySelectedScreen(id);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
