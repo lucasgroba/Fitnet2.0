@@ -37,5 +37,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
 //    compile 'com.android.support:multidex:1.0.0'
     testCompile 'junit:junit:4.12'
-    compile files('libs/FitnetKeygen.jar')
+}
+android {
+    useLibrary 'org.apache.http.legacy'
 }
