@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -40,7 +43,12 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,7 +188,9 @@ public class LoginActivity extends AppCompatActivity  {
         private final String mKey;
         String username;
         String nombre;
-        Byte[] imagen;
+        String imagen;
+        byte[] imagenarray;
+        //Byte[] imagen;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -203,7 +213,17 @@ public class LoginActivity extends AppCompatActivity  {
                 JSONObject respJson =  new JSONObject(respString);
                 nombre = respJson.getString("nombre");
                 username= respJson.getString("username");
-                imagen =(Byte[])respJson.get("imagen");
+                imagen =respJson.getString("imagen");
+                URL url = new URL("http://fitnet.com.uy"+imagen);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap bmp = BitmapFactory.decodeStream(input);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                imagenarray = stream.toByteArray();
+                //(Byte[])
 
             }
             catch (ClientProtocolException e) {
@@ -224,7 +244,11 @@ public class LoginActivity extends AppCompatActivity  {
         @Override
         protected void onPostExecute(Void aVoid) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("nombre",nombre);
+            intent.putExtra("username",username);
+            intent.putExtra("imagen",imagenarray);
             startActivity(intent);
+
 
         }
 
