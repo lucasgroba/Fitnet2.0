@@ -10,12 +10,5 @@
     tools:showIn="@layout/app_bar_main">
 
 
-    <fragment
-        android:id="@+id/fragment1"
-        android:name="com.example.lucas.fitnet20.fragmentListar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="32dp"
-        tools:layout="@layout/fragment_listar" />
+
 </android.support.constraint.ConstraintLayout>

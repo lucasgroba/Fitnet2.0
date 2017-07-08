@@ -51,23 +51,7 @@ public class fragmentListar extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.fragment_listar, container,false);
-        /*
-        if(view==null)
-        {
-            view=inflater.inflate(R.layout.fragment_listar,container,false);
-        }
-        else
-        {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            parent.removeView(view);
-        }*/
-        /*
-        array=new ArrayList();
-        array.add("HOLAAAA");
-        array.add("CHAUUU");
-        array.add("SAPEEE!!");
-        */
+
         String data = getArguments().getString("dato");
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +76,8 @@ public class fragmentListar extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_listar,container,false);
 
-        return view;
-        /*
+
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -101,9 +85,22 @@ public class fragmentListar extends Fragment {
                                     long arg3) {
                 // TODO Auto-generated method stub
                 Log.v("TAG", "CLICKED row number: " + arg2);
+                Item_Actividad seleccionado = (Item_Actividad) list.getAdapter().getItem(arg2);
+                fragmentMostrar fragment= new fragmentMostrar();
+                FragmentManager mf = getFragmentManager();
+                android.app.FragmentTransaction t= mf.beginTransaction();
+                t.add(R.id.content_main,fragment);
+                //ft.replace(R.id.content_main,fragment);
+                //ft.commit();
+                t.commit();
+                Bundle data = new Bundle();
+                data.putSerializable("item", seleccionado);
+                fragment.setArguments(data);
+
             }
 
-        });*/
+        });
+        return view;
 
     }
 

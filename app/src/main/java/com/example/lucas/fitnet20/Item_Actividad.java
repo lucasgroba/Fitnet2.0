@@ -1,10 +1,12 @@
 package com.example.lucas.fitnet20;
 
+import java.io.Serializable;
+
 /**
  * Created by lucas on 6/7/2017.
  */
 
-public class Item_Actividad extends Item {
+public class Item_Actividad extends Item implements Serializable{
     private int id;
     private String Actividad;
     private Float Precio;
