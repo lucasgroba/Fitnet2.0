@@ -19,4 +19,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_actividad_">Actividad_Activity</string>
+    <string name="precio">Precio</string>
+    <string name="dias">Dias:</string>
+    <string name="periodo">Periodo:</string>
+    <string name="ingresar">Ingresar</string>
 </resources>

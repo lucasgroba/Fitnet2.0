@@ -160,8 +160,7 @@ public class LoginActivity extends AppCompatActivity  {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 
-            mAuthTask = new UserLoginTask(email,password);
-            mAuthTask.execute(email,password);
+            new UserLoginTask(email,password).execute();
         }
     }
 
@@ -206,14 +205,18 @@ public class LoginActivity extends AppCompatActivity  {
             HttpGet get = new HttpGet("http://fitnet.com.uy/api/usuarios/obtener/"+mKey);
             get.setHeader("Content-Type","application/json");
 
+
             try{
+                Log.i("Pre execute","doInBackground");
                 HttpResponse resp = httpClient.execute(get);
+                Log.i("execute","doInBackground");
                 String respString = EntityUtils.toString(resp.getEntity());
 
                 JSONObject respJson =  new JSONObject(respString);
                 nombre = respJson.getString("nombre");
                 username= respJson.getString("username");
                 imagen =respJson.getString("imagen");
+
                 URL url = new URL("http://fitnet.com.uy"+imagen);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
@@ -247,6 +250,7 @@ public class LoginActivity extends AppCompatActivity  {
             intent.putExtra("nombre",nombre);
             intent.putExtra("username",username);
             intent.putExtra("imagen",imagenarray);
+            intent.putExtra("Key", mKey);
             startActivity(intent);
 
 

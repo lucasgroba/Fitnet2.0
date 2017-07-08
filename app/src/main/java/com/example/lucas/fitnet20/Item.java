@@ -13,6 +13,10 @@ public class Item {
         this.descripcion = descripcion;
     }
 
+    public Item() {
+
+    }
+
     public int getImagen() {
         return imagen;
     }

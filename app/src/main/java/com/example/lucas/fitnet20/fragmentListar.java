@@ -1,9 +1,16 @@
 package com.example.lucas.fitnet20;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +19,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -21,8 +43,7 @@ import java.util.ArrayList;
 public class fragmentListar extends Fragment {
     private View view;
     private ListView list;
-    private ArrayList<Item> arrayItem;
-    private ArrayList<String> array;
+    private ArrayList<Item_Actividad> arrayItem;
     private Context mycontext;
 
     public fragmentListar() {
@@ -47,22 +68,30 @@ public class fragmentListar extends Fragment {
         array.add("CHAUUU");
         array.add("SAPEEE!!");
         */
+        String data = getArguments().getString("dato");
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentIngresarActividad fragment= new FragmentIngresarActividad();
+                FragmentManager mf = getFragmentManager();
+                android.app.FragmentTransaction t= mf.beginTransaction();
+                t.add(R.id.content_main,fragment);
+                //ft.replace(R.id.content_main,fragment);
+                //ft.commit();
+                t.commit();
+                Bundle data = new Bundle();
+                data.putString("dato", String.valueOf(data));
+                fragment.setArguments(data);
+            }
+        });
+
+
+        new UserLoginTask(data).execute();
+
+
         view = inflater.inflate(R.layout.fragment_listar,container,false);
-        arrayItem = new ArrayList();
-        Item i= new Item("El loco de WTF");
-        i.setTitulo("El loco de WTF");
-        i.setImagen(R.drawable.wtf);
-        arrayItem.add(i);
 
-        Item e= new Item("Cantante del Cuarteto");
-        e.setTitulo("Roberto Musso");
-        e.setImagen(R.drawable.roberto);
-        arrayItem.add(e);
-
-        //ArrayAdapter<String> lva = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,array);
-        ListViewAdapter adapter=new ListViewAdapter(arrayItem,getActivity());
-        list=(ListView)view.findViewById(R.id.listaMenu);
-        list.setAdapter(adapter);
         return view;
         /*
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,5 +105,77 @@ public class fragmentListar extends Fragment {
 
         });*/
 
+    }
+
+    public class UserLoginTask extends AsyncTask<String, Void, Void> {
+
+        private final String mKey;
+        Item_Actividad actividad;
+        ArrayList<Item_Actividad> arrayActividad;
+
+        UserLoginTask(String dato) {
+            mKey = dato;
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            Log.i("Inicio de consulta","doInBackground");
+            HttpClient httpClient = new DefaultHttpClient();
+
+            HttpGet get = new HttpGet("http://fitnet.com.uy/api/actividades/listar/"+mKey);
+            get.setHeader("Content-Type","application/json");
+
+
+            try{
+                Log.i("Pre execute","doInBackground");
+                HttpResponse resp = httpClient.execute(get);
+                Log.i("execute","doInBackground");
+                String respString = EntityUtils.toString(resp.getEntity());
+                JSONArray Json = new JSONArray(respString);
+                for(int cont = 0; cont<Json.length(); cont++){
+                    JSONObject Act = (JSONObject) Json.get(cont);
+                    actividad.setActividad( Act.getString("nombre"));
+                    actividad.setId(Act.getInt("id"));
+                    actividad.setPerdido(Act.getInt("periodo"));
+                    actividad.setDias(Act.getInt("dias"));
+                    actividad.setPrecio((Float)Act.get("precio"));
+                    arrayItem.add(actividad);
+                }
+
+
+//                URL url = new URL("http://fitnet.com.uy"+imagen);
+//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                connection.setDoInput(true);
+//                connection.connect();
+//                InputStream input = connection.getInputStream();
+//                Bitmap bmp = BitmapFactory.decodeStream(input);
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                imagenarray = stream.toByteArray();
+//                //(Byte[])
+
+            }
+            catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+
+            //ArrayAdapter<String> lva = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,array);
+            Item_ActividadAdapter adapter=new Item_ActividadAdapter(arrayItem,getActivity());
+            list=(ListView)view.findViewById(R.id.listaMenu);
+            list.setAdapter(adapter);
+
+
+        }
     }
 }

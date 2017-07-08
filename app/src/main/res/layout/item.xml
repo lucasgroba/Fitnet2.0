@@ -5,10 +5,6 @@
     android:weightSum="1">
 
 
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="70dp"
-        android:layout_height="100dp" />
 
     <TextView
         android:id="@+id/titulo"
