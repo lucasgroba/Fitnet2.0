@@ -24,4 +24,5 @@
     <string name="dias">Dias:</string>
     <string name="periodo">Periodo:</string>
     <string name="ingresar">Ingresar</string>
+    <string name="IngresarNombre">IngresarNombre</string>
 </resources>

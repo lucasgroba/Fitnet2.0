@@ -9,15 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by santiago on 04/06/17.
+ * Created by lucas on 9/7/2017.
  */
 
-public class fragmentMostrar extends Fragment {
-    Item_Actividad seleccionado;
+public class fragmentMostrarArticulo extends Fragment {
+    Item_Articulo seleccionado;
     TextView nombre;
     TextView precio;
-    TextView dias;
-    TextView periodo;
 
     @Nullable
     @Override
@@ -26,15 +24,11 @@ public class fragmentMostrar extends Fragment {
         view = inflater.inflate(R.layout.fragment_mostrar,container,false);
 
         nombre = (TextView)view.findViewById(R.id.textNombre);
-        precio = (TextView) view.findViewById(R.id.textPrecio);
-        dias = (TextView) view.findViewById(R.id.textDias);
-        periodo = (TextView) view.findViewById(R.id.textPeriodo);
+        precio = (TextView)view.findViewById(R.id.textPrecio);
 
-        seleccionado =(Item_Actividad) getArguments().getSerializable("item");
-        nombre.setText(seleccionado.getActividad().toString());
+        seleccionado =(Item_Articulo) getArguments().getSerializable("item");
+        nombre.setText(seleccionado.getNombre().toString());
         precio.setText(seleccionado.getPrecio().toString());
-        dias.setText(seleccionado.getDias());
-        periodo.setText(seleccionado.getPerdido());
 
 
         return view;

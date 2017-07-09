@@ -3,20 +3,14 @@ package com.example.lucas.fitnet20;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.apache.http.HttpResponse;
@@ -29,35 +23,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by santiago on 04/06/17.
+ * Created by lucas on 9/7/2017.
  */
 
-public class fragmentListar extends Fragment {
+public class fragmentListarArticulo extends Fragment{
     private View view;
     private ListView list;
-    private ArrayList<Item_Actividad> arrayItem;
+    private ArrayList<Item_Articulo> arrayItem;
     private Context mycontext;
 
-    public fragmentListar() {
+    public fragmentListarArticulo() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         String data = getArguments().getString("dato");
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.nuevo);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentIngresarActividad fragment= new FragmentIngresarActividad();
+                FragmentIngresarArticulo fragment= new FragmentIngresarArticulo();
                 FragmentManager mf = getFragmentManager();
                 android.app.FragmentTransaction t= mf.beginTransaction();
                 t.add(R.id.content_main,fragment);
@@ -71,10 +61,10 @@ public class fragmentListar extends Fragment {
         });
 
 
-        new ActividadTask(data).execute();
+        new ArticulosTask(data).execute();
 
 
-        view = inflater.inflate(R.layout.fragment_listar,container,false);
+        view = inflater.inflate(R.layout.fragment_listar_articulos,container,false);
 
 
 
@@ -85,8 +75,8 @@ public class fragmentListar extends Fragment {
                                     long arg3) {
                 // TODO Auto-generated method stub
                 Log.v("TAG", "CLICKED row number: " + arg2);
-                Item_Actividad seleccionado = (Item_Actividad) list.getAdapter().getItem(arg2);
-                fragmentMostrar fragment= new fragmentMostrar();
+                Item_Articulo seleccionado = (Item_Articulo) list.getAdapter().getItem(arg2);
+                fragmentMostrarArticulo fragment= new fragmentMostrarArticulo();
                 FragmentManager mf = getFragmentManager();
                 android.app.FragmentTransaction t= mf.beginTransaction();
                 t.add(R.id.content_main,fragment);
@@ -104,13 +94,13 @@ public class fragmentListar extends Fragment {
 
     }
 
-    public class ActividadTask extends AsyncTask<String, Void, Void> {
+    public class ArticulosTask extends AsyncTask<String, Void, Void> {
 
         private final String mKey;
-        Item_Actividad actividad;
-        ArrayList<Item_Actividad> arrayActividad;
+        Item_Articulo articulo;
+        ArrayList<Item_Articulo> arrayArticulos;
 
-        ActividadTask(String dato) {
+        ArticulosTask(String dato) {
             mKey = dato;
         }
 
@@ -119,7 +109,7 @@ public class fragmentListar extends Fragment {
             Log.i("Inicio de consulta","doInBackground");
             HttpClient httpClient = new DefaultHttpClient();
 
-            HttpGet get = new HttpGet("http://fitnet.com.uy/api/actividades/listar/"+mKey);
+            HttpGet get = new HttpGet("http://fitnet.com.uy/api/articulos/listar/"+mKey);
             get.setHeader("Content-Type","application/json");
 
 
@@ -130,13 +120,11 @@ public class fragmentListar extends Fragment {
                 String respString = EntityUtils.toString(resp.getEntity());
                 JSONArray Json = new JSONArray(respString);
                 for(int cont = 0; cont<Json.length(); cont++){
-                    JSONObject Act = (JSONObject) Json.get(cont);
-                    actividad.setActividad( Act.getString("nombre"));
-                    actividad.setId(Act.getInt("id"));
-                    actividad.setPerdido(Act.getInt("periodo"));
-                    actividad.setDias(Act.getInt("dias"));
-                    actividad.setPrecio((Float)Act.get("precio"));
-                    arrayItem.add(actividad);
+                    JSONObject Art = (JSONObject) Json.get(cont);
+                    articulo.setNombre( Art.getString("nombre"));
+                    articulo.setId(Art.getInt("id"));
+                    articulo.setPrecio((Float)Art.get("precio"));
+                    arrayItem.add(articulo);
                 }
 
 
@@ -168,7 +156,7 @@ public class fragmentListar extends Fragment {
 
 
             //ArrayAdapter<String> lva = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,array);
-            Item_ActividadAdapter adapter=new Item_ActividadAdapter(arrayItem,getActivity());
+            Item_ArticuloAdapter adapter=new Item_ArticuloAdapter(arrayItem,getActivity());
             list=(ListView)view.findViewById(R.id.listaMenu);
             list.setAdapter(adapter);
 

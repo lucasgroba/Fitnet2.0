@@ -148,6 +148,16 @@ public class MainActivity extends AppCompatActivity
             fragment.setArguments(data);
             // Handle the camera action
         } else if (id == R.id.ItemArticulos) {
+            fragmentListarArticulo fragment= new fragmentListarArticulo();
+            FragmentManager mf = getFragmentManager();
+            android.app.FragmentTransaction t= mf.beginTransaction();
+            t.add(R.id.content_main,fragment);
+            //ft.replace(R.id.content_main,fragment);
+            //ft.commit();
+            t.commit();
+            Bundle data = new Bundle();
+            data.putString("dato", getIntent().getStringExtra("Key"));
+            fragment.setArguments(data);
 
         } else if (id == R.id.ItemUsuario) {
 
