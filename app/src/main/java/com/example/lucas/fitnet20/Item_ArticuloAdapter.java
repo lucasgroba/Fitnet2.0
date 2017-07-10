@@ -46,8 +46,8 @@ public class Item_ArticuloAdapter extends BaseAdapter {
         }
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(R.layout.item_articulos,viewGroup,false);
-        TextView nombre = (TextView) view.findViewById(R.id.Articulo);
-        TextView precio = (TextView) view.findViewById(R.id.Precio);
+        TextView nombre = (TextView) view.findViewById(R.id.ArticuloArt);
+        TextView precio = (TextView) view.findViewById(R.id.PrecioArt);
         nombre.setText(arrayListItem.get(i).getNombre());
         precio.setText(arrayListItem.get(i).getPrecio().toString());
         return view;

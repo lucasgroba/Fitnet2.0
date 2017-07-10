@@ -23,8 +23,8 @@ public class fragmentMostrarArticulo extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_mostrar,container,false);
 
-        nombre = (TextView)view.findViewById(R.id.textNombre);
-        precio = (TextView)view.findViewById(R.id.textPrecio);
+        nombre = (TextView)view.findViewById(R.id.textNombreArt);
+        precio = (TextView)view.findViewById(R.id.textPrecioArt);
 
         seleccionado =(Item_Articulo) getArguments().getSerializable("item");
         nombre.setText(seleccionado.getNombre().toString());
