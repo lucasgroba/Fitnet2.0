@@ -28,7 +28,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.math.BigDecimal;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,6 +52,7 @@ public class fragmentListar extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        view = inflater.inflate(R.layout.fragment_listar,container,false);
         String data = getArguments().getString("dato");
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,10 +73,6 @@ public class fragmentListar extends Fragment {
 
 
         new ActividadTask(data).execute();
-
-
-        view = inflater.inflate(R.layout.fragment_listar,container,false);
-
 
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -121,8 +118,8 @@ public class fragmentListar extends Fragment {
 
             HttpGet get = new HttpGet("http://fitnet.com.uy/api/actividades/listar/"+mKey);
             get.setHeader("Content-Type","application/json");
-
-
+            actividad=new Item_Actividad();
+            arrayItem =new ArrayList();
             try{
                 Log.i("Pre execute","doInBackground");
                 HttpResponse resp = httpClient.execute(get);
@@ -135,7 +132,7 @@ public class fragmentListar extends Fragment {
                     actividad.setId(Act.getInt("id"));
                     actividad.setPerdido(Act.getInt("periodo"));
                     actividad.setDias(Act.getInt("dias"));
-                    actividad.setPrecio((Float)Act.get("precio"));
+                    actividad.setPrecio(BigDecimal.valueOf(Act.getDouble("precio")).floatValue());
                     arrayItem.add(actividad);
                 }
 
@@ -165,7 +162,6 @@ public class fragmentListar extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-
 
             //ArrayAdapter<String> lva = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,array);
             Item_ActividadAdapter adapter=new Item_ActividadAdapter(arrayItem,getActivity());
