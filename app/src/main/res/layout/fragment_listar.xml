@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
-
-    <ListView
-        android:id="@+id/listaMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="410dp"
-        android:layout_weight="0.50" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -16,8 +11,16 @@
         android:layout_height="0dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@android:color/transparent"
+        android:layout_weight="1"
         android:background="@android:drawable/ic_input_add"
-        android:layout_weight="1" />
+        android:backgroundTint="@android:color/transparent"
+        android:visibility="visible"
+        app:elevation="@dimen/activity_vertical_margin" />
+
+    <ListView
+        android:id="@+id/listaMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="410dp"
+        android:layout_weight="0.50" />
 
 </LinearLayout>

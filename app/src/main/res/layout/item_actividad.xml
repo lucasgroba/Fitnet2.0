@@ -8,14 +8,14 @@
 
 
     <TextView
-        android:id="@+id/Actividad"
+        android:id="@+id/ActividadItem"
         android:layout_width="275dp"
         android:layout_height="56dp"
         android:layout_weight="0.02"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/Precio"
+        android:id="@+id/PrecioItem"
         android:layout_width="match_parent"
         android:layout_height="51dp" />
 </LinearLayout>

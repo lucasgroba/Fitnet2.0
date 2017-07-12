@@ -60,7 +60,7 @@ public class fragmentListarArticulo extends Fragment{
             }
         });
 
-
+        list=(ListView)view.findViewById(R.id.listaMenuArt);
         new ArticulosTask(data).execute();
 
 
@@ -157,7 +157,7 @@ public class fragmentListarArticulo extends Fragment{
 
             //ArrayAdapter<String> lva = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,array);
             Item_ArticuloAdapter adapter=new Item_ArticuloAdapter(arrayItem,getActivity());
-            list=(ListView)view.findViewById(R.id.listaMenuArt);
+
             list.setAdapter(adapter);
 
 

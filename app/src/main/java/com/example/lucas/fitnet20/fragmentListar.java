@@ -70,7 +70,7 @@ public class fragmentListar extends Fragment {
                 fragment.setArguments(data);
             }
         });
-
+        list=(ListView)view.findViewById(R.id.listaMenu);
 
         new ActividadTask(data).execute();
 
@@ -97,6 +97,15 @@ public class fragmentListar extends Fragment {
             }
 
         });
+        arrayItem = new ArrayList<>();
+        Item_Actividad prueba = new Item_Actividad();
+        prueba.setActividad("pimba");
+        float num = (float) 156.00;
+        prueba.setPrecio(num);
+        arrayItem.add(prueba);
+        Item_ActividadAdapter adapter=new Item_ActividadAdapter(arrayItem,getActivity());
+
+        list.setAdapter(adapter);
         return view;
 
     }
@@ -113,7 +122,7 @@ public class fragmentListar extends Fragment {
 
         @Override
         protected Void doInBackground(String... params) {
-            Log.i("Inicio de consulta","doInBackground");
+            Log.i("Inicio de consulta Act","doInBackground");
             HttpClient httpClient = new DefaultHttpClient();
 
             HttpGet get = new HttpGet("http://fitnet.com.uy/api/actividades/listar/"+mKey);
@@ -164,8 +173,9 @@ public class fragmentListar extends Fragment {
         protected void onPostExecute(Void aVoid) {
 
             //ArrayAdapter<String> lva = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,array);
+            Log.i("inicio","postExecute");
             Item_ActividadAdapter adapter=new Item_ActividadAdapter(arrayItem,getActivity());
-            list=(ListView)view.findViewById(R.id.listaMenu);
+
             list.setAdapter(adapter);
 
 
