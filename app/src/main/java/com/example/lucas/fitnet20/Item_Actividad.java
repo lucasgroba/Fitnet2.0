@@ -11,7 +11,7 @@ public class Item_Actividad extends Item implements Serializable{
     private String Actividad;
     private Float Precio;
     private int Dias;
-    private int Perdido;
+    private int Periodo;
 
     public int getDias() {
         return Dias;
@@ -21,12 +21,12 @@ public class Item_Actividad extends Item implements Serializable{
         Dias = dias;
     }
 
-    public int getPerdido() {
-        return Perdido;
+    public int getPeriodo() {
+        return Periodo;
     }
 
-    public void setPerdido(int perdido) {
-        Perdido = perdido;
+    public void setPeriodo(int periodo) {
+        Periodo = periodo;
     }
 
     public Item_Actividad(){

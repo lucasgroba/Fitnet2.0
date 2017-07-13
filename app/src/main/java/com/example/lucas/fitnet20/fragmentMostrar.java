@@ -33,8 +33,9 @@ public class fragmentMostrar extends Fragment {
         seleccionado =(Item_Actividad) getArguments().getSerializable("item");
         nombre.setText(seleccionado.getActividad().toString());
         precio.setText(seleccionado.getPrecio().toString());
-        dias.setText(seleccionado.getDias());
-        periodo.setText(seleccionado.getPerdido());
+        String dia = String.valueOf(seleccionado.getDias());
+        dias.setText(dia);
+        periodo.setText(String.valueOf(seleccionado.getPeriodo()));
 
 
         return view;

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_collapseParallaxMultiplier="1.0">
+    app:layout_collapseParallaxMultiplier="1.0"
+    android:weightSum="1">
 
     <EditText
         android:id="@+id/nombre"
@@ -37,6 +38,11 @@
         android:ems="10"
         android:hint="@string/periodo"
         android:inputType="number" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.93" />
 
     <Button
         android:id="@+id/buttonIngresar"

@@ -25,17 +25,17 @@ public class Item_ArticuloAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return arrayListItem.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return arrayListItem.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return arrayListItem.get(position).getId();
     }
 
     @Override

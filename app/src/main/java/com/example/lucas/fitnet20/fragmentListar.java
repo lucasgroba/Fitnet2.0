@@ -97,15 +97,6 @@ public class fragmentListar extends Fragment {
             }
 
         });
-        arrayItem = new ArrayList<>();
-        Item_Actividad prueba = new Item_Actividad();
-        prueba.setActividad("pimba");
-        float num = (float) 156.00;
-        prueba.setPrecio(num);
-        arrayItem.add(prueba);
-        Item_ActividadAdapter adapter=new Item_ActividadAdapter(arrayItem,getActivity());
-
-        list.setAdapter(adapter);
         return view;
 
     }
@@ -127,7 +118,6 @@ public class fragmentListar extends Fragment {
 
             HttpGet get = new HttpGet("http://fitnet.com.uy/api/actividades/listar/"+mKey);
             get.setHeader("Content-Type","application/json");
-            actividad=new Item_Actividad();
             arrayItem =new ArrayList();
             try{
                 Log.i("Pre execute","doInBackground");
@@ -136,13 +126,15 @@ public class fragmentListar extends Fragment {
                 String respString = EntityUtils.toString(resp.getEntity());
                 JSONArray Json = new JSONArray(respString);
                 for(int cont = 0; cont<Json.length(); cont++){
+                    actividad=new Item_Actividad();
                     JSONObject Act = (JSONObject) Json.get(cont);
                     actividad.setActividad( Act.getString("nombre"));
                     actividad.setId(Act.getInt("id"));
-                    actividad.setPerdido(Act.getInt("periodo"));
+                    actividad.setPeriodo(Act.getInt("periodo"));
                     actividad.setDias(Act.getInt("dias"));
                     actividad.setPrecio(BigDecimal.valueOf(Act.getDouble("precio")).floatValue());
                     arrayItem.add(actividad);
+                    actividad = null;
                 }
 
 

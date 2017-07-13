@@ -62,10 +62,11 @@ public class FragmentIngresarActividad extends Fragment {
                @Override
                public void onClick(View v) {
                    if(nombre.getText().toString()!=""&& precio.getText().toString()!="" && dias.getText().toString()!=""&& periodo.getText().toString()!=""){
+                       actividad = new Item_Actividad();
                        actividad.setActividad(nombre.getText().toString());
                        actividad.setPrecio(Float.valueOf(precio.getText().toString()));
                        actividad.setDias(Integer.valueOf(dias.getText().toString()));
-                       actividad.setPerdido(Integer.valueOf(periodo.getText().toString()));
+                       actividad.setPeriodo(Integer.valueOf(periodo.getText().toString()));
                        new IngresarActividadTask(Key, actividad).execute();
                    }
                    else {
@@ -106,11 +107,11 @@ public class FragmentIngresarActividad extends Fragment {
                 interno.put("nombre",actividad.getActividad());
                 interno.put("precio",actividad.getPrecio());
                 interno.put("dias",actividad.getDias());
-                interno.put("periodo",actividad.getPerdido());
+                interno.put("periodo",actividad.getPeriodo());
                 principal.put("actividad",interno);
                 List<NameValuePair> nvp = new ArrayList<NameValuePair>(2);
                 nvp.add(new BasicNameValuePair("article", principal.toString()));
-                //post.setHeader("Content-type", "application/json");
+                post.setHeader("Content-type", "application/json");
                 post.setEntity(new UrlEncodedFormEntity(nvp));
 
 
