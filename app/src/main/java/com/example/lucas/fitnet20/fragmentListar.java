@@ -53,7 +53,7 @@ public class fragmentListar extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_listar,container,false);
-        String data = getArguments().getString("dato");
+        final String dat = getArguments().getString("dato");
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,13 +66,13 @@ public class fragmentListar extends Fragment {
                 //ft.commit();
                 t.commit();
                 Bundle data = new Bundle();
-                data.putString("dato", String.valueOf(data));
+                data.putString("dato", dat);
                 fragment.setArguments(data);
             }
         });
         list=(ListView)view.findViewById(R.id.listaMenu);
 
-        new ActividadTask(data).execute();
+        new ActividadTask(dat).execute();
 
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -53,7 +53,7 @@ public class FragmentIngresarActividad extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_ingresar_actividad,container,false);
-        Key = getArguments().getString("dato");
+        Key = getArguments().getString("dato").toString();
         nombre=(EditText)view.findViewById(R.id.nombre);
         precio = (EditText) view.findViewById(R.id.precio);
         dias = (EditText) view.findViewById(R.id.dias);
