@@ -9,9 +9,9 @@ import java.io.Serializable;
 public class Item_Articulo implements Serializable {
     private int id;
     private String Nombre;
-    private Float Precio;
+    private float Precio;
 
-    public Item_Articulo(String nombre, Float precio) {
+    public Item_Articulo(String nombre, float precio) {
         Nombre = nombre;
         Precio = precio;
     }
@@ -35,11 +35,11 @@ public class Item_Articulo implements Serializable {
         Nombre = nombre;
     }
 
-    public Float getPrecio() {
+    public float getPrecio() {
         return Precio;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(float precio) {
         Precio = precio;
     }
 }

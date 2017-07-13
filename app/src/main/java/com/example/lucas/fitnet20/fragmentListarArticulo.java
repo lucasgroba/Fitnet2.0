@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -41,9 +42,9 @@ public class fragmentListarArticulo extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        view = inflater.inflate(R.layout.fragment_listar_articulos,container,false);
         String data = getArguments().getString("dato");
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.nuevo);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.nuevoArt);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +65,7 @@ public class fragmentListarArticulo extends Fragment{
         new ArticulosTask(data).execute();
 
 
-        view = inflater.inflate(R.layout.fragment_listar_articulos,container,false);
+
 
 
 
@@ -119,12 +120,15 @@ public class fragmentListarArticulo extends Fragment{
                 Log.i("execute","doInBackground");
                 String respString = EntityUtils.toString(resp.getEntity());
                 JSONArray Json = new JSONArray(respString);
+                arrayItem = new ArrayList();
                 for(int cont = 0; cont<Json.length(); cont++){
                     JSONObject Art = (JSONObject) Json.get(cont);
+                    articulo = new Item_Articulo();
                     articulo.setNombre( Art.getString("nombre"));
                     articulo.setId(Art.getInt("id"));
-                    articulo.setPrecio((Float)Art.get("precio"));
+                    articulo.setPrecio(BigDecimal.valueOf(Art.getDouble("precio")).floatValue());
                     arrayItem.add(articulo);
+                    articulo = null;
                 }
 
 

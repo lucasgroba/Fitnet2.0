@@ -21,14 +21,14 @@ public class fragmentMostrarArticulo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view;
-        view = inflater.inflate(R.layout.fragment_mostrar,container,false);
+        view = inflater.inflate(R.layout.fragment_mostrar_articulo,container,false);
 
         nombre = (TextView)view.findViewById(R.id.textNombreArt);
         precio = (TextView)view.findViewById(R.id.textPrecioArt);
 
         seleccionado =(Item_Articulo) getArguments().getSerializable("item");
         nombre.setText(seleccionado.getNombre().toString());
-        precio.setText(seleccionado.getPrecio().toString());
+        precio.setText(String.valueOf(seleccionado.getPrecio()));
 
 
         return view;

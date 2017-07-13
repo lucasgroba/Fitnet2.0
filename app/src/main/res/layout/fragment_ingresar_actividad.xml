@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_collapseParallaxMultiplier="1.0"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#FFFFFF">
 
     <EditText
         android:id="@+id/nombre"

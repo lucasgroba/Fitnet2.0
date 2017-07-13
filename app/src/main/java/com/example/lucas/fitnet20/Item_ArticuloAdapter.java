@@ -49,7 +49,7 @@ public class Item_ArticuloAdapter extends BaseAdapter {
         TextView nombre = (TextView) view.findViewById(R.id.ArticuloArt);
         TextView precio = (TextView) view.findViewById(R.id.PrecioArt);
         nombre.setText(arrayListItem.get(i).getNombre());
-        precio.setText(arrayListItem.get(i).getPrecio().toString());
+        precio.setText("$"+String.valueOf(arrayListItem.get(i).getPrecio()));
         return view;
     }
 }

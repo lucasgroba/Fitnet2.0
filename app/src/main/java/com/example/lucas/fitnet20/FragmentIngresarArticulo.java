@@ -43,7 +43,7 @@ public class FragmentIngresarArticulo extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view;
-        view = inflater.inflate(R.layout.fragment_ingresar_actividad,container,false);
+        view = inflater.inflate(R.layout.fragment_ingresar_articulo,container,false);
         Key = getArguments().getString("dato");
         nombre=(EditText)view.findViewById(R.id.editArtNombre);
         precio = (EditText) view.findViewById(R.id.editArtPrecio);

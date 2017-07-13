@@ -20,6 +20,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -109,10 +110,11 @@ public class FragmentIngresarActividad extends Fragment {
                 interno.put("dias",actividad.getDias());
                 interno.put("periodo",actividad.getPeriodo());
                 principal.put("actividad",interno);
-                List<NameValuePair> nvp = new ArrayList<NameValuePair>(2);
-                nvp.add(new BasicNameValuePair("article", principal.toString()));
+                String json = principal.toString();
+                StringEntity jsonEnt = new StringEntity(json);
+                post.setEntity(jsonEnt);
+//                post.setHeader("Accept", "application/json");
                 post.setHeader("Content-type", "application/json");
-                post.setEntity(new UrlEncodedFormEntity(nvp));
 
 
                 HttpResponse resp = httpClient.execute(post);
