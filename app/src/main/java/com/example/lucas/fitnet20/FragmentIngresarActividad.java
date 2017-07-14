@@ -63,7 +63,7 @@ public class FragmentIngresarActividad extends Fragment {
         BtnIngresar.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   if((!TextUtils.isEmpty((CharSequence) nombre))&&(!TextUtils.isEmpty((CharSequence) precio )) && (!TextUtils.isEmpty((CharSequence) dias))&& (!TextUtils.isEmpty((CharSequence) periodo))){
+                   if(true){
                        actividad = new Item_Actividad();
                        actividad.setActividad(nombre.getText().toString());
                        actividad.setPrecio(Float.valueOf(precio.getText().toString()));
