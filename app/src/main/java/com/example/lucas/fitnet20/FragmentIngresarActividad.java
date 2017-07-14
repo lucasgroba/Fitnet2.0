@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,7 @@ public class FragmentIngresarActividad extends Fragment {
         BtnIngresar.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   if(nombre.getText().toString()!=""&& precio.getText().toString()!="" && dias.getText().toString()!=""&& periodo.getText().toString()!=""){
+                   if((!TextUtils.isEmpty((CharSequence) nombre))&&(!TextUtils.isEmpty((CharSequence) precio )) && (!TextUtils.isEmpty((CharSequence) dias))&& (!TextUtils.isEmpty((CharSequence) periodo))){
                        actividad = new Item_Actividad();
                        actividad.setActividad(nombre.getText().toString());
                        actividad.setPrecio(Float.valueOf(precio.getText().toString()));
@@ -113,7 +114,6 @@ public class FragmentIngresarActividad extends Fragment {
                 String json = principal.toString();
                 StringEntity jsonEnt = new StringEntity(json);
                 post.setEntity(jsonEnt);
-//                post.setHeader("Accept", "application/json");
                 post.setHeader("Content-type", "application/json");
 
 
