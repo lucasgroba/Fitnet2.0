@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/userImagen"
+        android:layout_width="396dp"
+        android:layout_height="210dp"
+        app:srcCompat="@drawable/usercliente" />
+
+    <TextView
+        android:id="@+id/UserNick"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0.17"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/NombreUser"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0.23"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/UserPermisos"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="0.27"
+        android:textStyle="italic" />
+
+</LinearLayout>
