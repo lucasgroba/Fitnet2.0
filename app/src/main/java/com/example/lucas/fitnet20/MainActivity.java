@@ -159,6 +159,16 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.ItemUsuario) {
 
         } else if (id == R.id.ItemConceptos) {
+            FragmentListarConcepto fragment= new FragmentListarConcepto();
+            FragmentManager mf = getFragmentManager();
+            android.app.FragmentTransaction t= mf.beginTransaction();
+            t.add(R.id.content_main,fragment);
+            //ft.replace(R.id.content_main,fragment);
+            //ft.commit();
+            t.commit();
+            Bundle data = new Bundle();
+            data.putString("dato", getIntent().getStringExtra("Key"));
+            fragment.setArguments(data);
 
         } else if (id == R.id.ItemClientes) {
             fragmentListarCliente fragment= new fragmentListarCliente();
